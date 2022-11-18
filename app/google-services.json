@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49532823153",
+    "project_id": "safetyreview2",
+    "storage_bucket": "safetyreview2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49532823153:android:b67a7ba910cef6b7015dd0",
+        "android_client_info": {
+          "package_name": "com.example.safetyreview2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49532823153-o58tio1r7to438v8p7tnu8ogpklen9j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM67VoguYw6eA2VXbIIrIlqZ8clQNVrqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49532823153-o58tio1r7to438v8p7tnu8ogpklen9j5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
