@@ -35,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
             "준장", "소장", "중장", "대장"
         )
         ranks.reverse()
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_article, ranks)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_register_article , ranks)
         binding.rankDropdownMenu.setAdapter(arrayAdapter)
         binding.rankDropdownMenu.dropDownHeight = 700
 
@@ -93,7 +93,8 @@ class RegisterActivity : AppCompatActivity() {
                                 "email" to email,
                                 "position" to position,
                                 "carbonCopyDocument" to ArrayList<String>(),
-                                "confirmDocument" to ArrayList<String>()
+                                "confirmDocument" to ArrayList<String>(),
+                                "savedDocumentList" to ArrayList<String>()
                             )
                         )
 

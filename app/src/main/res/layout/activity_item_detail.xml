@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
+        android:visibility="gone"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp">
 
@@ -79,7 +80,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/add_image"
+                android:id="@+id/addImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -91,43 +92,11 @@
                 android:textSize="15dp" />
 
             <LinearLayout
-                android:id="@+id/image_layout"
+                android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="12dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_remove_circle_24"
-                    app:tint="#EB4D3D" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"
-                    app:cardCornerRadius="5dp">
-
-                    <ImageView
-                        android:id="@+id/image_src"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/earth" />
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dp"
-                    android:text="이미지"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="15dp" />
+                android:orientation="vertical"
+                android:animateLayoutChanges="true">
 
             </LinearLayout>
 

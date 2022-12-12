@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/slidingUpPanelLayout"
@@ -33,7 +34,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/exit"
+                    android:id="@+id/backButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -102,7 +103,7 @@
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="12dp"
                         android:layout_marginVertical="4dp"
-                        android:text="미리보기"
+                        android:text="미리보기 및 전송"
                         android:textColor="@color/white"
                         android:textSize="14dp" />
 
@@ -117,17 +118,13 @@
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
@@ -150,6 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
@@ -323,16 +321,16 @@
             android:animateLayoutChanges="true">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/carbon_copy_chip_group"
+                android:id="@+id/carbonCopyChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
                 android:paddingHorizontal="8dp"
-                app:layout_constraintBottom_toTopOf="@id/carbon_copy"
-                app:layout_constraintStart_toStartOf="@+id/carbon_copy" />
+                app:layout_constraintBottom_toTopOf="@id/carbonCopy"
+                app:layout_constraintStart_toStartOf="@+id/carbonCopy" />
 
             <AutoCompleteTextView
-                android:id="@+id/carbon_copy"
+                android:id="@+id/carbonCopy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -373,16 +371,16 @@
             android:animateLayoutChanges="true">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/recipient_chip_group"
+                android:id="@+id/confirmerChipGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
                 android:paddingHorizontal="8dp"
-                app:layout_constraintBottom_toTopOf="@id/recipient"
-                app:layout_constraintStart_toStartOf="@+id/recipient" />
+                app:layout_constraintBottom_toTopOf="@id/confirmer"
+                app:layout_constraintStart_toStartOf="@+id/confirmer" />
 
             <AutoCompleteTextView
-                android:id="@+id/recipient"
+                android:id="@+id/confirmer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"

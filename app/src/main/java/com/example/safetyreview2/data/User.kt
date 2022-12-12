@@ -6,4 +6,4 @@ data class User(
     var name: String? = null,
     var position: String? = null,
     var uid: String? = null
-)
+): java.io.Serializable

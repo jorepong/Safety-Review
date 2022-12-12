@@ -1,15 +1,16 @@
 package com.example.safetyreview2.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.safetyreview2.data.Document
 import com.example.safetyreview2.R
 import com.example.safetyreview2.adapter.SavedDocumentRecyclerAdapter
+import com.example.safetyreview2.data.Document
 import com.example.safetyreview2.databinding.ActivitySavedDocumentsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,35 +32,36 @@ class SavedDocumentsActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.exitBtn.setOnClickListener { finish() }
-        CoroutineScope(Dispatchers.Main).launch {
-            documentList = CoroutineScope(Dispatchers.IO).async {
-                getDocumentList(auth.currentUser?.uid.toString())
-            }.await()
-
-            binding.progressBar.visibility = View.GONE
-            initializeViews()
+        CoroutineScope(Dispatchers.IO).launch {
+            val documents = getDocumentList(auth.currentUser?.uid.toString())
+            documentList = documents
+            withContext(Dispatchers.Main) {
+                binding.progressBar.visibility = View.GONE
+                initializeViews()
+            }
         }
     }
 
     private suspend fun getDocumentList(uid: String): ArrayList<Document> {
-        var list = ArrayList<Document>()
-        database.collection("documents").get().addOnSuccessListener { dataSnapShot ->
-            if(dataSnapShot != null) {
-                for(data in dataSnapShot) {
-                    val document = Document()
-                    val title = data.get("title").toString()
-                    val createdTime = data.getTimestamp("createdTime")?.toDate()
-                    val modifiedTime = data.getTimestamp("modifiedTime")?.toDate()
-                    val documentId = data.get("documentId").toString()
-                    document.title = title
-                    document.createdTime = createdTime
-                    document.modifiedTime = modifiedTime
-                    document.documentId = documentId
-                    list.add(document)
-                }
-            }
-        }.await()
-        return list
+        var documents = ArrayList<Document>()
+
+        val userSnapShot = database.collection("users").document(uid).get().await()
+        val savedDocumentList = userSnapShot.get("savedDocumentList") as ArrayList<String>
+        for(documentId in savedDocumentList) {
+            val documentSnapShot = database.collection("documents").document(documentId).get().await()
+            val document = Document()
+            val title = documentSnapShot.get("title").toString()
+            val createdTime = documentSnapShot.getTimestamp("createdTime")?.toDate()
+            val modifiedTime = documentSnapShot.getTimestamp("modifiedTime")?.toDate()
+            val documentId = documentSnapShot.get("documentId").toString()
+            document.title = title
+            document.createdTime = createdTime
+            document.modifiedTime = modifiedTime
+            document.documentId = documentId
+            documents.add(document)
+        }
+
+        return documents
     }
 
     private fun initializeViews() {

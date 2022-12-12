@@ -2,6 +2,7 @@ package com.example.safetyreview2.activity
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -36,15 +37,15 @@ class MainActivity : AppCompatActivity() {
         var uid = auth.currentUser?.uid.toString()
 
         CoroutineScope(Dispatchers.IO).launch {
-            var user = User()
-            var carbonCopyDocument = db.collection("users").document(uid).get().await().get("carbonCopyDocument") as ArrayList<String>
-            db.collection("users").document(uid).get()
-                .addOnSuccessListener { documentSnapShot ->
-                    user = documentSnapShot.toObject<User>()!!
-                }.await()
+            val userDataSnapShot = db.collection("users").document(uid).get().await()
+            val carbonCopyDocument = userDataSnapShot.get("carbonCopyDocument") as ArrayList<String>
+            val user = userDataSnapShot.toObject<User>()
+
             withContext(Dispatchers.Main) {
-                binding.name.text = "${user.rank} ${user.name}"
-                binding.position.text = "${user.position}"
+                if(user != null) {
+                    binding.name.text = "${user.rank} ${user.name}"
+                    binding.position.text = "${user.position}"
+                }
                 if(carbonCopyDocument.size != 0) {
                     binding.numberOfUnreadDocument.text = carbonCopyDocument.size.toString()
                     binding.numberOfUnreadDocument.setTextColor(Color.parseColor("#FF5900"))
@@ -62,12 +63,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.checkUpdate.setOnClickListener {
-            val intent = Intent(applicationContext, UpdatePageActivity::class.java)
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jorepong/Safety-Review/releases/download/0.1.0/safety_review.apk"))
             startActivity(intent)
+//            val intent = Intent(applicationContext, UpdatePageActivity::class.java)
+//            startActivity(intent)
         }
 //
 //        binding.btnDownload.setOnClickListener {
-//            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://drive.google.com/u/0/uc?id=1aok0L_vSwgy11Dg9arsfCSO36C16zMjY&export=download&confirm=t&uuid=bfbf96dc-e0f9-4770-8157-b64a401f343c"))
+//            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jorepong/Safety-Review/releases/download/0.1.0/safety_review.apk"))
 //            startActivity(intent)
 //        }
 
